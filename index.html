@@ -86,7 +86,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             color: var(--dark);
-            padding: 30px 0;
+            padding: 20px 0;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             position: sticky;
@@ -126,11 +126,44 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            z-index: 1001;
         }
 
         .logo-icon {
             font-size: 1.2em;
             filter: drop-shadow(0 4px 8px rgba(230, 30, 99, 0.3));
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--gradient-2);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
         }
 
         /* Modern Navigation */
@@ -769,35 +802,68 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+
             .header-content {
-                flex-direction: column;
-                gap: 15px;
                 padding: 0 15px;
             }
 
             .logo {
-                font-size: 1.8em;
+                font-size: 1.6em;
+                gap: 10px;
+            }
+
+            .logo-icon {
+                font-size: 1em;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             nav {
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding-top: 80px;
+                z-index: 999;
+            }
+
+            nav.active {
+                right: 0;
             }
 
             nav ul {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 8px;
+                flex-direction: column;
+                gap: 0;
                 width: 100%;
             }
 
             nav ul li {
-                flex: 0 0 auto;
+                width: 100%;
+                border-bottom: 1px solid rgba(230, 30, 99, 0.1);
             }
 
             nav ul li a {
-                padding: 10px 15px;
-                font-size: 0.85em;
+                width: 100%;
+                padding: 20px 30px;
+                border-radius: 0;
+                font-size: 1.1em;
+                text-align: left;
+            }
+
+            nav ul li a:hover {
+                transform: translateX(5px);
+                background: linear-gradient(90deg, rgba(230, 30, 99, 0.1) 0%, transparent 100%);
             }
 
             .hero {
@@ -892,16 +958,25 @@
 
         @media (max-width: 480px) {
             .logo {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
             .logo-icon {
-                font-size: 1em;
+                font-size: 0.9em;
+            }
+
+            .menu-toggle span {
+                width: 25px;
+            }
+
+            nav {
+                width: 100%;
+                right: -100%;
             }
 
             nav ul li a {
-                padding: 8px 12px;
-                font-size: 0.8em;
+                padding: 18px 25px;
+                font-size: 1em;
             }
 
             .hero h1 {
@@ -998,7 +1073,12 @@
                 <span class="logo-icon">✨</span>
                 Красотка
             </div>
-            <nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="navMenu">
                 <ul>
                     <li><a href="#home">Главная</a></li>
                     <li><a href="#services">Услуги</a></li>
@@ -1343,6 +1423,32 @@
     <button class="scroll-top" id="scrollTop">↑</button>
 
     <script>
+        // Hamburger menu functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('#navMenu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Scroll to top functionality
         const scrollTopBtn = document.getElementById('scrollTop');
         
