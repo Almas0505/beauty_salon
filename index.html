@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Салон красоты "Красотка" - Современная красота</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -326,6 +326,13 @@
             margin-top: 60px;
         }
 
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
         .service-card {
             background: white;
             padding: 40px 30px;
@@ -389,6 +396,12 @@
             padding: 80px 20px;
         }
 
+        @media (max-width: 768px) {
+            .price-section {
+                padding: 60px 15px;
+            }
+        }
+
         .price-category {
             margin-bottom: 60px;
         }
@@ -414,6 +427,13 @@
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .price-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
 
         .price-card {
@@ -479,6 +499,13 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
 
         .contact-card {
@@ -582,12 +609,36 @@
             text-align: center;
         }
 
+        @media (max-width: 768px) {
+            .stats {
+                padding: 60px 15px;
+            }
+
+            .stats h2 {
+                font-size: 2em !important;
+            }
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             max-width: 1000px;
             margin: 60px auto 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
         }
 
         .stat-item {
@@ -702,27 +753,74 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
+        @media (max-width: 1024px) {
+            .logo {
+                font-size: 2em;
             }
 
             nav ul {
+                gap: 5px;
+            }
+
+            nav ul li a {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
                 flex-direction: column;
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.8em;
+            }
+
+            nav {
                 width: 100%;
             }
 
+            nav ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+            }
+
+            nav ul li {
+                flex: 0 0 auto;
+            }
+
+            nav ul li a {
+                padding: 10px 15px;
+                font-size: 0.85em;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding: 60px 20px;
+            }
+
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 2.2em;
+                line-height: 1.2;
             }
 
             .hero-subtitle {
-                font-size: 1.1em;
+                font-size: 1em;
             }
 
             .section-title h2 {
-                font-size: 2.5em;
+                font-size: 2.2em;
+            }
+
+            .section-title p {
+                font-size: 1em;
+                padding: 0 10px;
             }
 
             .cta-buttons {
@@ -733,10 +831,133 @@
 
             .btn {
                 width: 100%;
+                padding: 16px 35px;
+                font-size: 1em;
             }
 
             .stat-number {
+                font-size: 2.5em;
+            }
+
+            .stat-label {
+                font-size: 1em;
+            }
+
+            .service-card {
+                padding: 30px 20px;
+            }
+
+            .service-icon {
                 font-size: 3em;
+            }
+
+            .service-card h3 {
+                font-size: 1.4em;
+            }
+
+            .price-card {
+                padding: 25px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .price-value {
+                font-size: 1.6em;
+                align-self: flex-end;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+
+            .contact-card h3 {
+                font-size: 1.3em;
+            }
+
+            .contact-card p {
+                font-size: 1em;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5em;
+            }
+
+            .logo-icon {
+                font-size: 1em;
+            }
+
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95em;
+            }
+
+            .section-title h2 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 60px 15px;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .stat-label {
+                font-size: 0.9em;
+            }
+
+            .service-card h3 {
+                font-size: 1.2em;
+            }
+
+            .service-card p {
+                font-size: 0.9em;
+            }
+
+            .price-info h4 {
+                font-size: 1.1em;
+            }
+
+            .price-info p {
+                font-size: 0.85em;
+            }
+
+            .price-value {
+                font-size: 1.4em;
+            }
+
+            .category-header h3 {
+                font-size: 2em;
+            }
+
+            .scroll-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+                bottom: 20px;
+                right: 20px;
             }
         }
 
